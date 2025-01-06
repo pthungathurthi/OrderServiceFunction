@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  order-service-lambda-api-dynamodb
+
+  Sample SAM Template for order-service-lambda-api-dynamodb
+
+Resources:
+  OrderServiceFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: OrderServiceFunction
+      Handler: com.praveen.OrderService::handleRequest
+      Runtime: java8.al2
+      MemorySize: 512
+      Timeout: 30
+      Events:
+        OrderEvents:
+          Type: Api
+          Properties:
+            Path: /orders
+            Method: POST
